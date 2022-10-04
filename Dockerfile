@@ -24,8 +24,10 @@ ENV NODE_ENV=production
 
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
+RUN chown -R node:node /app/node_modules
 
 COPY --chown=node:node --from=builder /app/build .
+COPY --chown=node:node --from=builder /app/public ./public
 
 USER node
 EXPOSE ${PORT}
