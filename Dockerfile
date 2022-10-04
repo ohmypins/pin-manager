@@ -10,18 +10,24 @@ FROM base AS builder
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-
-# ENV NODE=production
-RUN yarn install --production
+RUN yarn install --frozen-lockfile
 
 COPY . .
+
+RUN yarn build
 
 # Runner stage
 FROM base AS runner
 
 WORKDIR /app
+ENV NODE_ENV=production
 
-COPY --chown=node:node --from=builder /app .
+COPY --chown=node:node package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
+COPY --chown=node:node --from=builder /app/build .
+
+USER node
 EXPOSE ${PORT}
+
 CMD [ "yarn", "start" ]

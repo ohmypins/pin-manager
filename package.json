@@ -2,13 +2,13 @@
   "name": "pin-manager",
   "version": "0.0.1",
   "description": "The low-level API for `pins` handling.",
-  "main": "./build/index.js",
+  "main": "./index.js",
   "repository": "git@github.com:ohmypins/pin-manager.git",
   "author": "ohmypinsdev <dev@ohmypins.app>",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/index.ts",
     "build": "tsc",
-    "start": "node ./build/index.js",
+    "start": "node ./index.js",
     "lint": "eslint **/*.ts",
     "lint:fix": "eslint **/*.ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
